@@ -3,6 +3,7 @@ module.exports = function () {
     var _ = require("lodash");
     var gender = ['male', 'female'];
     var media = ['Facebook', 'Twitter', 'Instagram', 'Pinterest', 'Snapchat', 'Blog', 'YouTube'];
+    var tags = ['Sports', 'Mom', 'Yoga', 'Tech', 'Funny', 'VideoGames', 'Health', 'School', 'Programming', 'SocialLife', 'Psychology', 'Basketball', 'Yoga', 'UFC', 'Music', 'Movies', 'Fashion','StarWars','Batman','Comics','Photography','Travel','Architecture'];
     var max = 45;
     var min = 18;
     return {
@@ -48,6 +49,11 @@ module.exports = function () {
                                 experience: faker.lorem.paragraphs(),
                             }
                         ]
+                    }
+                }),
+                tags: _.times(3, function (n) {
+                    return {
+                        tag: tags[Math.floor(Math.random() * tags.length)]
                     }
                 })
             }
