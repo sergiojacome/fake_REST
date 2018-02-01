@@ -1,13 +1,15 @@
 module.exports = function () {
     var faker = require("faker");
     var _ = require("lodash");
-    var gender = ['male', 'female'];
-    var media = ['Facebook', 'Twitter', 'Instagram', 'Pinterest', 'Snapchat', 'Blog', 'YouTube'];
-    var tags = ['Sports', 'Mom', 'Yoga', 'Tech', 'Funny', 'VideoGames', 'Health', 'School', 'Programming', 'SocialLife', 'Psychology', 'Basketball', 'Yoga', 'UFC', 'Music', 'Movies', 'Fashion','StarWars','Batman','Comics','Photography','Travel','Architecture'];
+    var gender = ['Male', 'Female'];
+    var some_states = ["AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FM", "FL", "GA", "VA"];
+    var media = ['Facebook', 'Twitter', 'Instagram', 'Pinterest', 'Snapchat', 'WordPress', 'YouTube'];
+    var numeralia = ['followers', 'visits', 'subscribers', 'likes', 'posts per day', 'posts per week'];
+    var tags = ['Sports', 'Mom', 'Yoga', 'Tech', 'Funny', 'VideoGames', 'Health', 'School', 'Programming', 'SocialLife', 'Psychology', 'Basketball', 'Yoga', 'UFC', 'Music', 'Movies', 'Fashion', 'StarWars', 'Batman', 'Comics', 'Photography', 'Travel', 'Architecture'];
     var max = 45;
     var min = 18;
     return {
-        people: _.times(100, function (n) {
+        people: _.times(10, function (n) {
             return {
                 id: n,
                 username: faker.internet.userName(),
@@ -23,32 +25,33 @@ module.exports = function () {
                 profile: faker.lorem.word(),
                 country: 'United States of America',
                 city: faker.address.city(),
-                state: faker.address.state(),
+                state: some_states[Math.floor(Math.random() * some_states.length)],
                 zip_code: faker.address.zipCode(),
+                dob: faker.date.past(),
                 age: Math.floor(Math.random() * (max - min) + min),
                 gender: gender[Math.floor(Math.random() * gender.length)],
-                occupation: faker.name.title,
-                nsfw: faker.random.boolean,
-                profile_picture: faker.internet.avatar,
+                occupation: faker.name.title(),
+                nsfw: faker.random.boolean(),
+                profile_picture: faker.internet.avatar(),
                 main_language: 'English',
                 other_languages: 'Spanish',
                 views: Math.floor(Math.random() * Math.floor(50000)),
                 saves: Math.floor(Math.random() * Math.floor(35000)),
                 last_transaction_on: faker.date.past(),
                 number_of_transactions: Math.floor(Math.random() * Math.floor(200)),
-                followers: _.times(3, function (n) {
+                followers: _.times(Math.floor(Math.random() * (3) + 1), function (n) {
                     return {
-                        item: [
-                            {
-                                media: media[Math.floor(Math.random() * media.length)],
-                                followers: Math.floor(Math.random() * Math.floor(3500)),
-                                visits_per_month: Math.floor(Math.random() * Math.floor(7500)),
-                                account_age: Math.floor(Math.random() * (6 - 1) + 1) + ' year(s)',
-                                url: faker.internet.url(),
-                                verified: false,
-                                experience: faker.lorem.paragraphs(),
+                        media: media[Math.floor(Math.random() * media.length)],
+                        account_age: Math.floor(Math.random() * (6 - 1) + 1) + ' year(s)',
+                        url: faker.internet.url(),
+                        verified: false,
+                        experience: faker.lorem.paragraphs(),
+                        numeralia: _.times(3, function (n) {
+                            return {
+                                tag: numeralia[Math.floor(Math.random() * numeralia.length)],
+                                value: Math.floor(Math.random() * Math.floor(1000000))
                             }
-                        ]
+                        })
                     }
                 }),
                 tags: _.times(3, function (n) {
