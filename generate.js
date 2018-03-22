@@ -8,8 +8,9 @@ module.exports = function () {
     var tags = ['Sports', 'Mom', 'Yoga', 'Tech', 'Funny', 'VideoGames', 'Health', 'School', 'Programming', 'SocialLife', 'Psychology', 'Basketball', 'Yoga', 'UFC', 'Music', 'Movies', 'Fashion', 'StarWars', 'Batman', 'Comics', 'Photography', 'Travel', 'Architecture'];
     var max = 45;
     var min = 18;
+    var package_types = ['Basic','Standard','Premium'];
     return {
-        people: _.times(10, function (n) {
+        people: _.times(50, function (n) {
             return {
                 id: n,
                 username: faker.internet.userName(),
@@ -21,9 +22,11 @@ module.exports = function () {
                 banned: faker.random.boolean(),
                 banned_since: faker.date.past(),
                 comments_internal: faker.lorem.sentence(),
-                description: faker.lorem.paragraphs(),
+                pitch: faker.lorem.paragraphs(),
+                description: '<p>Krusty the Clown: Kids, we need to talk for a moment about Krusty Brand Chew Goo Gum Like Substance. We all knew it contained spider eggs, but the hanta virus? That came out of left field. So if you\'re experiencing numbness and/or comas, send five dollars to antidote, PO box...  [gets interrupted by a newscast]</p><p>Marge: Homer, it\'s easy to criticize.  Homer: Fun, too.</p><p>Private detective: Where\'s principal Skinner\'s office?  Groundskeeper Willie: Wait a minute. You can\'t just walk in there.  Private detective: You know, you\'re the spitting image of the Aberdeen strangler. Groundskeeper Willie: Carry on.  [leaves, whistling]</p><p>[repeated line]  Mr. Burns: Excellent.</p>',
+                //'faker.lorem.paragraphs(),
                 profile: faker.lorem.word(),
-                country: 'United States of America',
+                country: 'USA',
                 city: faker.address.city(),
                 state: some_states[Math.floor(Math.random() * some_states.length)],
                 zip_code: faker.address.zipCode(),
@@ -57,6 +60,14 @@ module.exports = function () {
                 tags: _.times(3, function (n) {
                     return {
                         tag: tags[Math.floor(Math.random() * tags.length)]
+                    }
+                }),
+                packages: _.times(Math.floor(Math.random() * (3) + 1), function (n) {
+                    return {
+                        price: Math.floor(Math.random() * (max - min) + min),
+                        package_type: package_types[Math.floor(Math.random() * package_types.length)],
+                        description: faker.lorem.sentence(),
+                        delivery_time: '2 weeks'
                     }
                 })
             }
